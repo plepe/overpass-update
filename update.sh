@@ -20,6 +20,12 @@ rm $PLANET
 
 osm3s_query --progress --rules --db-dir=$DB_DIR < $EXEC_DIR/db/rules/areas_low_ram.osm3s
 
+if [ "$?" != "0" ] ; then
+  date
+  echo "An error occured when creating areas"
+  exit 1
+fi
+
 date
 
 mv db-new/* db/
