@@ -14,6 +14,11 @@ date
 
 time osm-3s_v0.7.51/src/bin/init_osm3s.sh $PLANET $DB_DIR $EXEC_DIR --meta
 
+if [ "$?" != "0" ] ; then
+  date
+  echo "An error occured when importing data"
+  exit 1
+fi
 date
 
 rm $PLANET
