@@ -31,6 +31,9 @@ touch -r planet-latest.osm.bz2 last_planet_timestamp
 
 date
 
+# While importing increase age of planet-import-complete
+echo -e '#!/bin/sh\ntouch --date "-4 month" /tiles/planet-import-complete' > /etc/cron.hourly/planet-import-complete
+
 time osm-3s_v0.7.51/src/bin/init_osm3s.sh $PLANET $DB_DIR $EXEC_DIR --meta
 
 if [ "$?" != "0" ] ; then
@@ -56,5 +59,8 @@ mv db-new/* db/
 
 date
 echo ${OSMDATE} > ${TIMESTAMP}
+
+# Done -> decrease age of planet-import-complete
+echo -e '#!/bin/sh\ntouch --date "-3 month" /tiles/planet-import-complete' > /etc/cron.hourly/planet-import-complete
 
 #touch /tiles/planet-import-complete
