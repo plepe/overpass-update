@@ -16,7 +16,7 @@ while : ; do
 
   while : ; do
   # check file date on the server
-    OSMDATE=`curl -I http://planet.openstreetmap.org/planet/planet-latest.osm.bz2  | grep -e '^Location:' | sed 's/^.*planet-\(.*\)\.osm\.bz2.*$/\1/'`
+    OSMDATE=`curl -I https://planet.openstreetmap.org/planet/planet-latest.osm.bz2  | grep -e '^Location:' | sed 's/^.*planet-\(.*\)\.osm\.bz2.*$/\1/'`
     echo "Newest planet file date: ${OSMDATE}, current: ${LAST_OSMDATE}"
 
   # if this is a new file, continue with the rest of the code
@@ -27,7 +27,7 @@ while : ; do
   done
 
   rm $PLANET
-  time wget --progress=dot:giga -O $PLANET http://planet.openstreetmap.org/planet/planet-latest.osm.bz2
+  time wget --progress=dot:giga -O $PLANET https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
   touch -r planet-latest.osm.bz2 last_planet_timestamp
 
   date
